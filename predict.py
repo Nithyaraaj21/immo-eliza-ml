@@ -3,12 +3,12 @@ import joblib
 import pandas as pd
 
 @click.command()
-@click.option("-i", "--input-dataset", help="path to input .csv dataset", required=True)
+@click.option("-i", "--input-dataset", help="Path to input .csv dataset", required=True)
 @click.option(
     "-o",
     "--output-prefix",
     default="output/predictions",
-    help="prefix for the full path where to store predictions (e.g., output/predictions)",
+    help="Prefix for the full path where to store predictions (e.g., output/predictions)",
     required=True,
 )
 def predict(input_dataset, output_prefix):
@@ -60,24 +60,12 @@ def predict(input_dataset, output_prefix):
     pd.DataFrame({"predictions": rf_predictions}).to_csv(rf_output_path, index=False)
     pd.DataFrame({"predictions": XG_predictions}).to_csv(XG_output_path, index=False)
 
-
     # Print success messages
     click.echo(click.style("Predictions generated successfully!", fg="green"))
-    click.echo(f"Saved to {linear_output_path, rf_output_path, XG_output_path}")
+    click.echo(f"Saved to {linear_output_path}, {rf_output_path}, {XG_output_path}")
     click.echo(
-        f"Nbr. observations: {data.shape[0]} | Nbr. predictions: {linear_predictions.shape[0], rf_predictions.shape[0], XG_predictions.shape[0] }"
+        f"Nbr. observations: {data.shape[0]} | Nbr. predictions: {linear_predictions.shape[0]}, {rf_predictions.shape[0]}, {XG_predictions.shape[0]}"
     )
-    ### -------------------------------------------------- ###
-
-"""         # Print success messages
-    print(f"Linear regression predictions saved to: {linear_output_path}")
-    print(f"Random forest regression predictions saved to: {rf_output_path}")p
-
-        ### -------- DO NOT TOUCH THE FOLLOWING LINES -------- ###
-    # Save the predictions to a CSV file (in order of data input! """
 
 if __name__ == "__main__":
     predict()
-
-
-
